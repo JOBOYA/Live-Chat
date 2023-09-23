@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { app } from '../firebase/config';
 import { doc, setDoc, getFirestore } from "firebase/firestore";
 
@@ -15,6 +15,12 @@ const useSignup = () => {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const uid = userCredential.user.uid;
+
+            // Mise à jour du displayName dans l'objet utilisateur
+            await updateProfile(userCredential.user, { displayName });
+            await userCredential.user.reload();
+
+            // Mise à jour du user ref
             user.value = userCredential.user;
 
             // Stocker des informations supplémentaires dans Firestore
