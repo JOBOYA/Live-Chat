@@ -3,8 +3,9 @@
     <input type="text" placeholder="Nom d'utilisateur" required v-model="displayName">
     <input type="email" placeholder="Email" required v-model="email">
     <input type="password" placeholder="Mot de passe" required v-model="password">
+    <div class="error">{{ error }}</div>
     <button type="submit">S'inscrire</button>
-    <p v-if="error">{{ error }}</p>
+    
   </form>
 </template>
 
@@ -14,7 +15,7 @@
 
     export default {
         setup() {
-          const { signup } = useSignup();
+          const { error, signup } = useSignup();
 
           //ref
             const displayName = ref('');
@@ -25,7 +26,7 @@
              await signup( email.value, password.value, displayName.value);
              console.log('user signed up');
         }
-        return { displayName, email, password, handleSubmit }
+        return { displayName, email, password, handleSubmit, error }
 
     }
 }
