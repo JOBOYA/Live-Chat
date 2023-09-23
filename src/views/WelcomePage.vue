@@ -4,12 +4,12 @@
     <p>Bienvenue</p>
   <div v-if="showLogin">
     <p>Connectez-vous</p>
-  <LoginForm/>
+  <LoginForm @login="enterChat"/>
   <p>Pas de compte?<span @click="showLogin = false ">Inscrivez-vous</span></p>
   </div>
 <div v-else>
   <p>Inscrivez-vous</p>
-  <SignupForm/>
+  <SignupForm @signup="enterChat"/>
   <p>Vous avez déjà un compte?<span @click="showLogin = true ">Connectez-vous</span></p>
     </div>
   </div>
@@ -19,6 +19,7 @@
 import SignupForm from "../components/SignupForm.vue";
 import LoginForm from '../components/LoginForm.vue';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 
 export default {
@@ -26,8 +27,14 @@ export default {
   components: {SignupForm, LoginForm},
   setup(){
     const showLogin = ref(true);
+    const router = useRouter();
+    const enterChat = () => {
+  router.push({name: 'LiveChatRoom'})
+}
 
-    return {showLogin}
+
+
+    return {showLogin , enterChat}
   }
 }
 

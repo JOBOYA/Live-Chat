@@ -9,7 +9,7 @@ const routes = [
       components: { default: WelcomePage },
     },
     {
-      path: '/chatroom',
+      path: '/chatRoom',
       name: 'LiveChatRoom',  
       components: { default: LiveChatRoom },
     }
