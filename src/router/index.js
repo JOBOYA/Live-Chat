@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import WelcomePage from '../views/WelcomePage.vue' 
 import LiveChatRoom from '../views/LiveChatRoom.vue' 
-import  { auth } from '../firebase/config.js'
+import  {  projectAuth } from '../firebase/config.js'
 
 //auth guard
 const requireAuth = (to, from, next) => {
- let user = auth.currentUser
+ let user =  projectAuth.currentUser
  console.log('current user in auth guard: ', user)
   if(!user){
     next({name: 'WelcomePage'})

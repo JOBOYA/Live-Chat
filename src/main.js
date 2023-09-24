@@ -3,11 +3,11 @@ import './assets/main.css'
 import router from './router'
 import App from './App.vue'
 
-import { auth } from './firebase/config.js'
+import {  projectAuth } from './firebase/config.js'
 
 let app
 
-auth.onAuthStateChanged(() => {
+ projectAuth.onAuthStateChanged(() => {
     if(!app){
 
     app = createApp(App)

@@ -1,16 +1,15 @@
 import { ref } from 'vue';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { app } from '../firebase/config';
 
 const error = ref(null);
+const displayName = ref(null);
 
 const login = async (email, password) => {
-    
     error.value = null;
-
     try {
-        const auth = getAuth(app);
-        const res = await signInWithEmailAndPassword(auth, email, password);
+        const authInstance = getAuth();
+        const res = await signInWithEmailAndPassword(authInstance, email, password);
+        displayName.value = res.user.displayName;  // Mettre à jour le displayName
         error.value = null;
         console.log(res);
         return res;
@@ -25,7 +24,7 @@ const login = async (email, password) => {
 };
 
 const useLogin = () => {
-    return { error, login };
+    return { error, login, displayName };
 };
 
 export default useLogin;

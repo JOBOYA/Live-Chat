@@ -4,17 +4,20 @@
     v-model="message"
     @keypress.enter.prevent="handleSubmit"
     ></textarea>
+    <div class="error">{{ error }}</div>
   </form>
 </template>
 
 <script>
 import { ref } from 'vue'
 import getUser from '../composables/getUser'
+import useCollection  from '../composables/useCollection'
 import { timestamp } from '../firebase/config'
 
 export default {
     setup() {
         const { user } = getUser()  // Utilisation de la déstructuration pour obtenir user directement
+        const {addDoc, error } = useCollection('messages') 
         const message = ref('')
 
         const handleSubmit = async () => {
@@ -25,12 +28,15 @@ export default {
         message: message.value,
         createdAt: timestamp()
     }
-    console.log("chat:", chat); // Pour voir l'objet chat complet
-    message.value = '';
+    await addDoc(chat);
+    if (!error.value) {
+        message.value = '';
+    }
+  
 }
 
         
-        return { message, handleSubmit }
+        return { message, handleSubmit, error }
     }
 }
 </script>

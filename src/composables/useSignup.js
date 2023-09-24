@@ -1,11 +1,11 @@
 import { ref } from 'vue';
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { app } from '../firebase/config';
-import { doc, setDoc, getFirestore } from "firebase/firestore";
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { projectAuth, projectFirestore } from '../firebase/config';
+import { doc, setDoc } from "firebase/firestore";
 
 const useSignup = () => {
-    const auth = getAuth(app);
-    const db = getFirestore();
+    const db = projectFirestore
+    const auth = projectAuth
     const error = ref(null);
     const user = ref(null);
 
