@@ -1,6 +1,7 @@
 <template>
  <div class="container">
 <NavBar/>
+<ChatWindow/>
 <NewChatForm/>
  </div>
 </template>
@@ -11,13 +12,14 @@
 // watch the current user for changes
 //redirect the user to the welcome page when they logged out
 import NewChatForm from '../components/NewChatForm.vue'
+import ChatWindow from '@/components/ChatWindow.vue'
 import NavBar from '../components/NavbarChat.vue'
 import getUser  from '../composables/getUser'
 import { watch } from 'vue'
 import { useRouter } from 'vue-router'
 
 export default {
-  components: { NavBar, NewChatForm },
+  components: { NavBar, NewChatForm, ChatWindow },
   setup() {
     const { user } = getUser()
     const router = useRouter()
