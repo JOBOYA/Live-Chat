@@ -23,6 +23,7 @@
             const password = ref('');
             
             const handleSubmit = async () => {
+              console.log("Succès de l'inscription, émission de l'événement 'signup'");
              await signup( email.value, password.value, displayName.value);
              if (!error.value) {
                       context.emit('signup');

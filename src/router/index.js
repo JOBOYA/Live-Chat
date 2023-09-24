@@ -1,17 +1,30 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import WelcomePage from '../views/WelcomePage.vue' 
-import LiveChatRoom from '../views/LiveChatRoom.vue'  // Renommé ici
+import LiveChatRoom from '../views/LiveChatRoom.vue' 
+import  { auth } from '../firebase/config.js'
+
+//auth guard
+const requireAuth = (to, from, next) => {
+ let user = auth.currentUser
+ console.log('current user in auth guard: ', user)
+  if(!user){
+    next({name: 'WelcomePage'})
+} else{
+    next()
+}
+}
 
 const routes = [
     {
       path: '/',
       name: 'WelcomePage', 
-      components: { default: WelcomePage },
+      components:  {default: WelcomePage}
     },
     {
-      path: '/chatRoom',
+      path: '/liveChatRoom',
       name: 'LiveChatRoom',  
-      components: { default: LiveChatRoom },
+      components: {default: LiveChatRoom},
+      beforeEnter: requireAuth
     }
 ]
 
