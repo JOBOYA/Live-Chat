@@ -50,7 +50,7 @@ export default {
 }
 
 .welcome form {
-    max-width: 300px;
+  max-width: 300px;
     margin: 20px auto;
 }
 
@@ -68,7 +68,7 @@ export default {
 
 
 .welcome input {
-    
+  box-sizing: border-box;
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
